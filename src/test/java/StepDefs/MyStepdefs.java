@@ -86,8 +86,8 @@ public class MyStepdefs {
         }
     }
 
-    @Then("fail")
-    public void fail() {
+    @Then("click something")
+    public void clickSomething() {
         driver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
         driver.findElement(By.name("q2")).click();
     }
