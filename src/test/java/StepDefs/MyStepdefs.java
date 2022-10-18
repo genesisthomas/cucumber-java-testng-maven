@@ -34,9 +34,13 @@ public class MyStepdefs {
 
     @Then("Enter {string} in the search text box.")
     public void enterInTheSearchTextBox(String arg0) {
-        driver.findElement(By.name("q")).click();
-        driver.findElement(By.name("q")).sendKeys(arg0);
-        driver.findElement(By.name("q")).sendKeys(Keys.ENTER);
+        By input = By.name("q");
+        WebDriverWait wait = new WebDriverWait(driver, 20);
+        wait.until(
+                ExpectedConditions.visibilityOfElementLocated(input));
+        driver.findElement(input).click();
+        driver.findElement(input).sendKeys(arg0);
+        driver.findElement(input).sendKeys(Keys.ENTER);
     }
 
     @And("Verify {string} in the first result.")
