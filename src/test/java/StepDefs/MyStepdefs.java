@@ -27,6 +27,11 @@ public class MyStepdefs {
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--headless");
         options.addArguments("--window-size=1920,1080");
+        options.addArguments("--disable-dev-shm-usage"); // overcome limited resource problems
+        options.addArguments("start-maximized"); // open Browser in maximized mode
+        options.addArguments("disable-infobars"); // disabling infobars
+        options.addArguments("--disable-extensions"); // disabling extensions
+        options.addArguments("--no-sandbox"); // Bypass OS security model
         driver = new ChromeDriver(options);
         driver.manage().window().maximize();
     }
