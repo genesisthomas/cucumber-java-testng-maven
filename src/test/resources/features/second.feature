@@ -1,6 +1,6 @@
-Feature: Fail Search
+Feature: Fail
 
   @fail
   Scenario: Sample fail
-    When Open Google on your browser
+    When Open kaholo on your browser
     Then fail

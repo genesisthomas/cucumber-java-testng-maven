@@ -1,13 +1,10 @@
-Feature: Google Search
+Feature: Kaholo Alert
 
   @pass
-  Scenario: Search for Kaholo in Google
-    When Open Google on your browser
-    Then Enter "Kaholo" in the search text box.
-    And Verify "Kaholo" in the first result.
-
-  @pass
-  Scenario: Search for Cucumber in Google
-    When Open Google on your browser
-    Then Enter "Cucumber" in the search text box.
-    And Verify "Cucumber" in the first result.
+  Scenario: Verify alert in Kaholo
+    When Open kaholo on your browser
+    Then Enter "Kaholo" in first name
+    And Enter "user" in last name
+    And Enter "email" in email
+    And Verify alert
+    And Take screenshot

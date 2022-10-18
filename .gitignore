@@ -5,3 +5,4 @@ target/
 .classpath
 *.iml
 headless_screenshot.png
+.DS_Store

@@ -2,7 +2,7 @@
 
 This cucumber sample contains multiple features files and runs the scenarios in parallel.
 
-### Run the below command to run multiple pass scenarios:
+### Run the below command to pass scenario:
 
         mvn install
 

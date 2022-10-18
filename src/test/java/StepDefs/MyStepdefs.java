@@ -6,14 +6,16 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import io.github.bonigarcia.wdm.WebDriverManager;
+import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.apache.commons.io.FileUtils;
+import org.openqa.selenium.interactions.Actions;
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 public class MyStepdefs {
@@ -24,38 +26,59 @@ public class MyStepdefs {
         WebDriverManager.chromedriver().setup();
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--headless");
+        options.addArguments("--window-size=1920,1080");
         driver = new ChromeDriver(options);
         driver.manage().window().maximize();
     }
 
-    @When("Open Google on your browser")
-    public void hitGoogleOnYourBrowser() {
-        driver.get("https://www.google.com");
+    @When("Open kaholo on your browser")
+    public void hitKaholoOnYourBrowser() {
+        driver.get("https://kaholo.io/join-kaholo-community/");
     }
 
-    @Then("Enter {string} in the search text box.")
-    public void enterInTheSearchTextBox(String arg0) {
-        By input = By.name("q");
+    @Then("Enter {string} in first name")
+    public void enterInTheFirstNameTextBox(String arg0) {
+        By firstName = By.id("input_6_7_3");
         WebDriverWait wait = new WebDriverWait(driver, 20);
-        wait.until(
-                ExpectedConditions.visibilityOfElementLocated(input));
-        File file = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(firstName)).click();
+        driver.findElement(firstName).sendKeys(arg0);
+    }
+
+    @Then("Enter {string} in last name")
+    public void enterInTheLastNameTextBox(String arg0) {
+        By lastName = By.id("input_6_8_6");
+        WebDriverWait wait = new WebDriverWait(driver, 20);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(lastName)).click();
+        driver.findElement(lastName).sendKeys(arg0);
+    }
+
+    @Then("Enter {string} in email")
+    public void enterInTheEmailTextBox(String arg0) {
+        By email = By.id("input_6_4");
+        WebElement element = driver.findElement(email);
+        element.sendKeys(arg0);
+    }
+
+    @And("Verify alert")
+    public void verifyAlert() {
+        By joinBtn = By.xpath("//input[@value='Join now']");
+        WebElement element = driver.findElement(joinBtn);
+        element.click();
+        By alert = By.xpath("//div[contains(text(),\'The email address entered is invalid, please check\')]");
+        WebDriverWait wait = new WebDriverWait(driver, 20);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(alert));
+        List<WebElement> elements = driver.findElements(alert);
+        assert (elements.size() > 0);
+    }
+
+    @And("Take screenshot")
+    public void takeScreenshot() {
+        File file = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
         try {
             FileUtils.copyFile(file, new File("headless_screenshot.png"));
         } catch (IOException e) {
             e.printStackTrace();
         }
-        driver.findElement(input).click();
-        driver.findElement(input).sendKeys(arg0);
-        driver.findElement(input).sendKeys(Keys.ENTER);
-    }
-
-    @And("Verify {string} in the first result.")
-    public void selectTheFirstResult(String arg0) {
-        WebDriverWait wait = new WebDriverWait(driver, 20);
-        wait.until(
-                ExpectedConditions.visibilityOfElementLocated(
-                        By.xpath("//h3[contains(.,'" + arg0 + "')]")));
     }
 
     @Then("fail")
