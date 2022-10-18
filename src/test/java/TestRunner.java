@@ -5,11 +5,13 @@ import org.testng.annotations.DataProvider;
 @CucumberOptions(
         features = {"src/test/resources/features"},
         glue = {"StepDefs"},
-        tags = ""
+        tags = "@pass",
+        plugin = { "pretty", "json:target/cucumber-reports/Cucumber.json" },
+        monochrome = true
 )
 public class TestRunner extends AbstractTestNGCucumberTests {
 
-    @DataProvider(parallel = true)
+    @DataProvider(parallel = true) //scenarios and rows in a scenario outline are executed in multiple threads
     public Object[][] scenarios() {
         return super.scenarios();
     }
