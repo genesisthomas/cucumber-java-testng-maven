@@ -6,7 +6,7 @@ import org.testng.annotations.DataProvider;
         features = {"src/test/resources/features"},
         glue = {"StepDefs"},
         tags = "@pass",
-        plugin = { "pretty", "json:Cucumber.json", "junit:target/Cucumber.xml", "html:target/Cucumber.html" },
+        plugin = { "pretty", "json:target/Cucumber.json", "junit:target/Cucumber.xml", "html:target/Cucumber.html" },
         monochrome = true
 )
 public class TestRunner extends AbstractTestNGCucumberTests {
