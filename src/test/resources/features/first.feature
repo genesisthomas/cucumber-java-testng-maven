@@ -1,6 +1,6 @@
 Feature: Kaholo Alert
 
-  @pass @DEMO-2
+  @pass @DEMO-7
   Scenario: Verify alert in Kaholo
     When Open kaholo on your browser
     Then Enter "Kaholo" in first name
