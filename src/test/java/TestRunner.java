@@ -6,7 +6,7 @@ import org.testng.annotations.DataProvider;
         features = {"src/test/resources/features"},
         glue = {"StepDefs"},
         tags = "@pass",
-        plugin = { "pretty", "json:target/cucumber-reports/Cucumber.json" },
+        plugin = { "pretty", "json:Cucumber.json", "junit:target/Cucumber.xml", "html:target/Cucumber.html" },
         monochrome = true
 )
 public class TestRunner extends AbstractTestNGCucumberTests {
@@ -15,4 +15,4 @@ public class TestRunner extends AbstractTestNGCucumberTests {
     public Object[][] scenarios() {
         return super.scenarios();
     }
-}
+}	
